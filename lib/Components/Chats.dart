@@ -7,7 +7,7 @@ class Chats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> contacts = ["Contact A", "Contact B", "Contact C"];
+    List<String> contacts = ["Contact A", "Contact B", "Contact C",];
     List<String> message = ["Hey", "Sup?", "Bye!"];
     List<String> messageStatus = ["Delivered", "Seen", "Sent"];
     List<String> messageTimestamp = ["yesterday", "9:30 AM", "10:30 PM"];
