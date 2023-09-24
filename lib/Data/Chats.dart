@@ -29,11 +29,12 @@ class Chats extends StatelessWidget {
             },
             child: CircleAvatar (
               backgroundImage: NetworkImage(profilePictures[index]),
+              radius: 30,
 
             ),
           ), 
           title: Text(contacts[index],
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+          style: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 0, 255, 145),),
           ),
 
           subtitle: Row (
@@ -76,7 +77,7 @@ class Chats extends StatelessWidget {
           ),
 
           trailing: Text(messageTimestamp[index],
-          style: const TextStyle(fontSize: 12, color: Colors.greenAccent),
+          style: const TextStyle(fontSize: 12, color: Color.fromARGB(255, 255, 255, 255)),
           ),
 
           onTap: () {

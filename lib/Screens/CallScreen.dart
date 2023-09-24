@@ -3,23 +3,23 @@
 import 'package:flutter/material.dart';
 import 'package:xmessenger/Data/AddChatsData.dart';
 
-class AddChatsScreen extends StatefulWidget {
-  const AddChatsScreen({super.key});
+class CallScreen extends StatefulWidget{
+  const CallScreen({super.key});
 
   @override
-  _AddChatsScreenState createState() => _AddChatsScreenState();
+  _CallScreenState  createState() => _CallScreenState();
 }
 
-class _AddChatsScreenState extends State<AddChatsScreen> {
-
+class _CallScreenState extends State<CallScreen> {
   @override
-  Widget build(BuildContext context) {
+
+  Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
         title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('New_Chat', style: TextStyle(fontStyle: FontStyle.italic, color: Color.fromARGB(255, 0, 255, 145),)),
+            Text('Make_A_Call', style: TextStyle(fontStyle: FontStyle.italic, color: Color.fromARGB(255, 0, 255, 145),)),
             Padding(padding: EdgeInsets.only(top: 5),
             child : Text('24 Contacts', style: TextStyle(color: Colors.white, fontSize: 14),)
             )
@@ -42,7 +42,7 @@ class _AddChatsScreenState extends State<AddChatsScreen> {
           color:  const Color.fromARGB(255, 0, 255, 145),)
         ],
       ),
-      
+
       body: Container(
         color: const Color.fromARGB(255, 44, 0, 62),
       child: Column(
@@ -56,13 +56,13 @@ class _AddChatsScreenState extends State<AddChatsScreen> {
         children: [
           ElevatedButton(
             onPressed: () {
-              print('Create a Group');
+              print('Select Contacts To Make A Group Call');
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 92, 19, 202), // Change the button color
             ),
             child: const Text(
-              'Create Group',
+              'Group Call',
               style: TextStyle(
                 fontStyle: FontStyle.italic,
                 color: Color.fromARGB(255, 0, 255, 145),
@@ -71,13 +71,13 @@ class _AddChatsScreenState extends State<AddChatsScreen> {
           ),
           ElevatedButton(
             onPressed: () {
-              print('Create a Channel!');
+              print('Add A New COntact');
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 92, 19, 202), // Change the button color
             ),
             child: const Text(
-              'Create Channel',
+              'New Contact',
               style: TextStyle(
                 fontStyle: FontStyle.italic,
                 color: Color.fromARGB(255, 0, 255, 145),
@@ -100,7 +100,5 @@ class _AddChatsScreenState extends State<AddChatsScreen> {
 ),
       )
     );
-
   }
 }
-
