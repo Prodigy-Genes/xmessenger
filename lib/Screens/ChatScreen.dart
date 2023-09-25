@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, library_private_types_in_public_api
 import 'package:flutter/material.dart';
+import 'package:xmessenger/Components/more_vert.dart';
 import 'package:xmessenger/Data/Chats.dart';
 import 'package:xmessenger/Components/cameraIcon.dart';
 import 'package:xmessenger/Components/messageIcon.dart';
@@ -51,6 +52,7 @@ class _ChatScreenState extends State<ChatScreen> {
             icon: const Icon(Icons.more_vert),
             onPressed: () {
               // Implement menu functionality
+              showMoreVertMenu(context);
             },
             color: const Color.fromARGB(255, 0, 255, 145)
           ),
