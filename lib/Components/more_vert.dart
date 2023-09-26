@@ -7,77 +7,70 @@ class MoreVertMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopupMenuButton<String>(
       onSelected: (String value) {
-        if (value == 'item1') {
+        if (value == 'Linked Devices') {
           // Perform action for item1
-        } else if (value == 'item2') {
+        } else if (value == 'Starred Messages') {
           // Perform action for item2
-        } else if (value == 'item3') {
+        } else if (value == 'Settings') {
           // Perform action for item3
         }
       },
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
         const PopupMenuItem<String>(
-          value: 'item1',
-          child: ListTile(
-            title: Text(
-              'Item 1',
-              style: TextStyle(
-                color: Color.fromARGB(255, 255, 0, 0), // Set text color
-              ),
-            ),
-            tileColor: Colors.blue, // Set background color
-            contentPadding: EdgeInsets.symmetric(horizontal: 16), // Adjust padding
-          ),
+          value: 'Option1',
+          child: Text('Linked Devices'),
         ),
         const PopupMenuItem<String>(
-          value: 'item2',
-          child: ListTile(
-            title: Text(
-              'Item 2',
-              style: TextStyle(
-                color: Colors.white, // Set text color
-              ),
-            ),
-            tileColor: Colors.green, // Set background color
-            contentPadding: EdgeInsets.symmetric(horizontal: 16), // Adjust padding
-          ),
+          value: 'Option2',
+          child: Text('Starred Messages'),
         ),
         const PopupMenuItem<String>(
-          value: 'item3',
-          child: ListTile(
-            title: Text(
-              'Item 3',
-              style: TextStyle(
-                color: Colors.white, // Set text color
-              ),
-            ),
-            tileColor: Colors.orange, // Set background color
-            contentPadding: EdgeInsets.symmetric(horizontal: 16), // Adjust padding
-          ),
+          value: 'Option 1',
+          child: Text('Settings'),
         ),
       ],
-      offset: const Offset(0, 50), // Adjust the position to the right
     );
   }
 }
 
 Future<void> showMoreVertMenu(BuildContext context) async {
+  final RenderBox button = context.findRenderObject() as RenderBox;
+  final Offset offset = button.localToGlobal(Offset.zero);
+
   final value = await showMenu<String>(
     context: context,
-    position: RelativeRect.fill,
-    items: const [
+    position: RelativeRect.fromLTRB(
+      offset.dx+button.size.width, // Left
+      offset.dy+70, // Top
+      MediaQuery.of(context).size.width - offset.dx , // Right
+      0, // Bottom
+    ),
+    items: [
       PopupMenuItem<String>(
-        value: 'item1',
-        child: Text('Item 1'),
+        value: 'option1',
+        child: Container(
+          width: 110, // Customize the width
+          padding: const EdgeInsets.all(15),
+          child: const Text('Linked Devices', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
+        ),
       ),
       PopupMenuItem<String>(
-        value: 'item2',
-        child: Text('Item 2'),
+        value: 'option2',
+        child: Container(
+          width: 110, // Customize the width
+          padding: const EdgeInsets.all(15),
+          child: const Text('Starred Messages', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
+        ),
       ),
       PopupMenuItem<String>(
-        value: 'item3',
-        child: Text('Item 3'),
+        value: 'option3',
+        child: Container(
+          width: 110, // Customize the width
+          padding: const EdgeInsets.all(15),
+          child: const Text('Settings', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
+        ),
       ),
+      
     ],
   );
 
