@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:xmessenger/Screens/linkedDevicesScreen.dart';
 import 'package:xmessenger/Screens/settingsScreen.dart';
 
 class MoreVertMenu extends StatelessWidget {
@@ -77,8 +78,9 @@ Future<void> showMoreVertMenu(BuildContext context) async {
     ],
   );
 
-  if (value == 'item1') {
+  if (value == 'Option1') {
     // Perform action for item1
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>const LinkedDevicesScreen()));
   } else if (value == 'item2') {
     // Perform action for item2
   } else if (value == 'Option3') {
