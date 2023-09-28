@@ -1,4 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:xmessenger/Screens/settingsScreen.dart';
 
 class MoreVertMenu extends StatelessWidget {
   const MoreVertMenu({Key? key}) : super(key: key);
@@ -7,12 +10,13 @@ class MoreVertMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopupMenuButton<String>(
       onSelected: (String value) {
-        if (value == 'Linked Devices') {
+        if (value == 'Option1') {
           // Perform action for item1
-        } else if (value == 'Starred Messages') {
+        } else if (value == 'Option2') {
           // Perform action for item2
-        } else if (value == 'Settings') {
-          // Perform action for item3
+        } else if (value == 'Option3') {
+          // Navigate to SettingsScreen
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen()));
         }
       },
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
@@ -25,7 +29,7 @@ class MoreVertMenu extends StatelessWidget {
           child: Text('Starred Messages'),
         ),
         const PopupMenuItem<String>(
-          value: 'Option 1',
+          value: 'Option3',
           child: Text('Settings'),
         ),
       ],
@@ -40,14 +44,14 @@ Future<void> showMoreVertMenu(BuildContext context) async {
   final value = await showMenu<String>(
     context: context,
     position: RelativeRect.fromLTRB(
-      offset.dx+button.size.width, // Left
-      offset.dy+70, // Top
-      MediaQuery.of(context).size.width - offset.dx , // Right
+      offset.dx + button.size.width, // Left
+      offset.dy + 70, // Top
+      MediaQuery.of(context).size.width - offset.dx, // Right
       0, // Bottom
     ),
     items: [
       PopupMenuItem<String>(
-        value: 'option1',
+        value: 'Option1',
         child: Container(
           width: 110, // Customize the width
           padding: const EdgeInsets.all(15),
@@ -55,7 +59,7 @@ Future<void> showMoreVertMenu(BuildContext context) async {
         ),
       ),
       PopupMenuItem<String>(
-        value: 'option2',
+        value: 'Option2',
         child: Container(
           width: 110, // Customize the width
           padding: const EdgeInsets.all(15),
@@ -63,14 +67,13 @@ Future<void> showMoreVertMenu(BuildContext context) async {
         ),
       ),
       PopupMenuItem<String>(
-        value: 'option3',
+        value: 'Option3',
         child: Container(
           width: 110, // Customize the width
           padding: const EdgeInsets.all(15),
           child: const Text('Settings', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
         ),
       ),
-      
     ],
   );
 
@@ -78,7 +81,8 @@ Future<void> showMoreVertMenu(BuildContext context) async {
     // Perform action for item1
   } else if (value == 'item2') {
     // Perform action for item2
-  } else if (value == 'item3') {
-    // Perform action for item3
+  } else if (value == 'Option3') {
+    // Navigate to SettingsScreen
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen()));
   }
 }
