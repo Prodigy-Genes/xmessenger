@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:xmessenger/Screens/inChatScreen.dart';
 
 class Chats extends StatelessWidget {
   const Chats({super.key});
@@ -83,6 +84,10 @@ class Chats extends StatelessWidget {
           onTap: () {
              // Handle tapping on a contact to open a chat
             // You can navigate to the chat screen or perform other actions here.
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>InChatScreen(
+              contacts: contacts, 
+              selectedIndex: index,
+              profilePictures: profilePictures,)));
           },
           
         );
