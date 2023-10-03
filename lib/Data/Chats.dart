@@ -13,6 +13,7 @@ class Chats extends StatelessWidget {
     List<String> messageStatus = ["Delivered", "Seen", "Sent"];
     List<String> messageTimestamp = ["yesterday", "9:30 AM", "10:30 PM"];
 
+
     final List<String> profilePictures = [
       'https://i.pinimg.com/564x/73/b7/f1/73b7f146a6f5d6201c3fd579aad12f66.jpg',
       'https://i.pinimg.com/564x/72/99/14/729914ee5f05da86c8660d7c785e79a6.jpg',
