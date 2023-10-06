@@ -12,7 +12,7 @@ class Chats extends StatelessWidget {
     List<String> message = ["Hey", "Sup?", "Bye!"];
     List<String> messageStatus = ["Delivered", "Seen", "Sent"];
     List<String> messageTimestamp = ["yesterday", "9:30 AM", "10:30 PM"];
-
+    List<bool> isUserMessage = [false, true, false]; 
 
     final List<String> profilePictures = [
       'https://i.pinimg.com/564x/73/b7/f1/73b7f146a6f5d6201c3fd579aad12f66.jpg',
@@ -86,6 +86,8 @@ class Chats extends StatelessWidget {
              // Handle tapping on a contact to open a chat
             // You can navigate to the chat screen or perform other actions here.
             Navigator.push(context, MaterialPageRoute(builder: (context)=>InChatScreen(
+              message: message,
+              isUserMessage: isUserMessage,
               contacts: contacts, 
               selectedIndex: index,
               profilePictures: profilePictures,)));

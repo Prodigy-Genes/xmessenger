@@ -1,17 +1,23 @@
 // ignore_for_file: file_names, library_private_types_in_public_api, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:xmessenger/Data/messages.dart';
 
 class InChatScreen extends StatefulWidget {
   final List<String> contacts;
   final List<String> profilePictures;
+  final List<String> message;
+  final List<bool> isUserMessage;
   final int selectedIndex;
 
-  const InChatScreen({super.key, 
+  const InChatScreen({
+    Key? key,
     required this.contacts,
     required this.selectedIndex,
     required this.profilePictures,
-  });
+    required this.message,
+    required this.isUserMessage,
+  }) : super(key: key);
 
   @override
   _InChatScreenState createState() => _InChatScreenState();
@@ -20,6 +26,7 @@ class InChatScreen extends StatefulWidget {
 class _InChatScreenState extends State<InChatScreen> {
   final TextEditingController _textController = TextEditingController();
   bool _isTextFieldEmpty = true;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -56,66 +63,70 @@ class _InChatScreenState extends State<InChatScreen> {
         ],
         backgroundColor: const Color.fromARGB(255, 51, 13, 87),
       ),
-      body: 
-      SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 563, 4.0, 0.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _textController,
-                      style: const TextStyle(color: Color.fromARGB(255, 0, 255, 145)),
-                      decoration: InputDecoration(
-                        hintText: 'Input message...',
-                        hintStyle: const TextStyle(color: Colors.grey),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(250.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(250.0),
-                        ),
-                        fillColor: const Color.fromARGB(255, 17, 17, 69),
-                        filled: true,
-                        prefixIcon: IconButton(
-                          onPressed: () => print('pressed on emojis'),
-                          icon: const Icon(Icons.emoji_emotions, color: Colors.yellowAccent),
-                        ),
-                        suffixIcon: _isTextFieldEmpty
-                            ? IconButton(
-                                onPressed: () => print('pressed on voice note'),
-                                icon: const Icon(Icons.mic, color: Colors.green),
-                              )
-                            : IconButton(
-                                onPressed: () {
-                                  print('Message sent: ${_textController.text}');
-                                  // Implement your message sending logic here
-                                },
-                                icon: const Icon(Icons.send_rounded, color: Color.fromARGB(255, 0, 255, 145)),
-                              ),
-                      ),
-                      onChanged: (text) {
-                        setState(() {
-                          _isTextFieldEmpty = text.isEmpty;
-                        });
-                      },
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () => print('pressed on gallery'),
-                    icon: const Icon(Icons.file_present, color: Color.fromARGB(255, 13, 198, 185)),
-                  ),
-                  IconButton(
-                    onPressed: () => print('pressed on camera'),
-                    icon: const Icon(Icons.camera_alt, color: Color.fromARGB(255, 65, 56, 194)),
-                  ),
-                ],
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Messages(
+              message: widget.message, 
+              scrollController: _scrollController,
+              isUserMessage: widget.isUserMessage,
               ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _textController,
+                    style: const TextStyle(color: Color.fromARGB(255, 0, 255, 145)),
+                    decoration: InputDecoration(
+                      hintText: 'Input message...',
+                      hintStyle: const TextStyle(color: Colors.grey),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(250.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(250.0),
+                      ),
+                      fillColor: const Color.fromARGB(255, 17, 17, 69),
+                      filled: true,
+                      prefixIcon: IconButton(
+                        onPressed: () => print('pressed on emojis'),
+                        icon: const Icon(Icons.emoji_emotions, color: Colors.yellowAccent),
+                      ),
+                      suffixIcon: _isTextFieldEmpty
+                          ? IconButton(
+                              onPressed: () => print('pressed on voice note'),
+                              icon: const Icon(Icons.mic, color: Colors.green),
+                            )
+                          : IconButton(
+                              onPressed: () {
+                                print('Message sent: ${_textController.text}');
+                                // Implement your message sending logic here
+                              },
+                              icon: const Icon(Icons.send_rounded, color: Color.fromARGB(255, 0, 255, 145)),
+                            ),
+                    ),
+                    onChanged: (text) {
+                      setState(() {
+                        _isTextFieldEmpty = text.isEmpty;
+                      });
+                    },
+                  ),
+                ),
+                IconButton(
+                  onPressed: () => print('pressed on gallery'),
+                  icon: const Icon(Icons.file_present, color: Color.fromARGB(255, 13, 198, 185)),
+                ),
+                IconButton(
+                  onPressed: () => print('pressed on camera'),
+                  icon: const Icon(Icons.camera_alt, color: Color.fromARGB(255, 65, 56, 194)),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       backgroundColor: const Color.fromARGB(255, 44, 0, 62),
     );
