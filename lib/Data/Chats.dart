@@ -8,91 +8,105 @@ class Chats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> contacts = ["Contact A", "Contact B", "Contact C",];
-    List<String> message = ["Hey", "Sup?", "Bye!"];
-    List<String> messageStatus = ["Delivered", "Seen", "Sent"];
-    List<String> messageTimestamp = ["yesterday", "9:30 AM", "10:30 PM"];
-    List<bool> isUserMessage = [false, true, false]; 
-
-    final List<String> profilePictures = [
-      'https://i.pinimg.com/564x/73/b7/f1/73b7f146a6f5d6201c3fd579aad12f66.jpg',
-      'https://i.pinimg.com/564x/72/99/14/729914ee5f05da86c8660d7c785e79a6.jpg',
-      'https://i.pinimg.com/564x/68/ea/28/68ea288e7de5c2c4aec494e6db818731.jpg'
+    List<Map<String, dynamic>> chatData = [
+      {
+        'contact': 'Contact A',
+        'message': 'Hey',
+        'messageStatus': 'Delivered',
+        'messageTimestamp': 'yesterday',
+        'isUserMessage': false,
+        'profilePicture':
+            'https://i.pinimg.com/564x/73/b7/f1/73b7f146a6f5d6201c3fd579aad12f66.jpg',
+      },
+      {
+        'contact': 'Contact B',
+        'message': 'Sup?',
+        'messageStatus': 'Seen',
+        'messageTimestamp': '9:30 AM',
+        'isUserMessage': true,
+        'profilePicture':
+            'https://i.pinimg.com/564x/72/99/14/729914ee5f05da86c8660d7c785e79a6.jpg',
+      },
+      {
+        'contact': 'Contact C',
+        'message': 'Bye!',
+        'messageStatus': 'Sent',
+        'messageTimestamp': '10:30 PM',
+        'isUserMessage': false,
+        'profilePicture':
+            'https://i.pinimg.com/564x/68/ea/28/68ea288e7de5c2c4aec494e6db818731.jpg',
+      },
     ];
 
-
     return ListView.builder(
-      itemCount: contacts.length,
+      itemCount: chatData.length,
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
           leading: GestureDetector(
-            onTap: (){
+            onTap: () {
               // Implement Function
             },
-            child: CircleAvatar (
-              backgroundImage: NetworkImage(profilePictures[index]),
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(chatData[index]['profilePicture']),
               radius: 30,
-
             ),
-          ), 
-          title: Text(contacts[index],
-          style: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 0, 255, 145),),
           ),
-
-          subtitle: Row (
+          title: Text(
+            chatData[index]['contact'],
+            style: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 0, 255, 145)),
+          ),
+          subtitle: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
-                  if (messageStatus[index] == "Delivered")
+                  if (chatData[index]['messageStatus'] == "Delivered"&& chatData[index]['isUserMessage']==true)
                     const Icon(
                       Icons.done_all,
                       size: 14,
                       color: Colors.white24,
                     )
-                  
-                  else if (messageStatus[index] == "Sent") 
+                  else if (chatData[index]['messageStatus'] == "Sent"&& chatData[index]['isUserMessage']==true)
                     const Icon(
                       Icons.check,
                       size: 14,
                       color: Colors.white24,
                     )
-
-                  else if (messageStatus[index] == "Seen")
-                    const Icon (
-                      Icons.done_all,
-                      size: 14,
-                      color: Colors.blueAccent
-                    )
+                  else if (chatData[index]['messageStatus'] == "Seen" && chatData[index]['isUserMessage']==true)
+                    const Icon(Icons.done_all, size: 14, color: Colors.blueAccent)
                 ],
               ),
               const SizedBox(width: 8,),
               Expanded(
                 child: Text(
-                message[index],
-                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: Colors.white24),
-              ),
-              
+                  chatData[index]['message'],
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: Colors.white24),
+                ),
               )
-
             ],
           ),
-
-          trailing: Text(messageTimestamp[index],
-          style: const TextStyle(fontSize: 12, color: Color.fromARGB(255, 255, 255, 255)),
+          trailing: Text(
+            chatData[index]['messageTimestamp'],
+            style: const TextStyle(fontSize: 12, color: Color.fromARGB(255, 255, 255, 255)),
           ),
-
           onTap: () {
-             // Handle tapping on a contact to open a chat
+            // Handle tapping on a contact to open a chat
             // You can navigate to the chat screen or perform other actions here.
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>InChatScreen(
-              message: message,
-              isUserMessage: isUserMessage,
-              contacts: contacts, 
-              selectedIndex: index,
-              profilePictures: profilePictures,)));
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => InChatScreen(
+                  message: [chatData[index]['message']],
+                  isUserMessage: [chatData[index]['isUserMessage']],
+                  contacts: [chatData[index]['contact']],
+                  selectedIndex: 0,
+                  profilePictures: [chatData[index]['profilePicture']],
+                  messageStatus: [chatData[index]['messageStatus']],
+                  messageTimestamp: [chatData[index]['messageTimestamp']],
+                ),
+              ),
+            );
           },
-          
         );
       },
     );

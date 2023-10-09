@@ -9,6 +9,8 @@ class InChatScreen extends StatefulWidget {
   final List<String> message;
   final List<bool> isUserMessage;
   final int selectedIndex;
+  final List<String> messageStatus;
+  final List<String> messageTimestamp;
 
   const InChatScreen({
     Key? key,
@@ -17,6 +19,8 @@ class InChatScreen extends StatefulWidget {
     required this.profilePictures,
     required this.message,
     required this.isUserMessage,
+    required this.messageStatus,
+    required this.messageTimestamp
   }) : super(key: key);
 
   @override
@@ -30,6 +34,7 @@ class _InChatScreenState extends State<InChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
     String selectedContact = widget.contacts[widget.selectedIndex];
     String selectedProfilePicture = widget.profilePictures[widget.selectedIndex];
     return Scaffold(
@@ -65,11 +70,38 @@ class _InChatScreenState extends State<InChatScreen> {
       ),
       body: Column(
         children: <Widget>[
+          GestureDetector(
+            onTap: (){
+              print('Learn More');
+            },
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(8),
+              margin: const EdgeInsets.only(left: 8, right: 8, top: 10),
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 58, 65, 14),
+                borderRadius: BorderRadius.circular(12)
+              ),
+              
+              child: const Row(
+                children: <Widget>[
+                    SizedBox(width: 35,),
+                    Icon(Icons.lock, size: 11, color: Colors.grey,),
+                    SizedBox(width:10),
+                    Text('Messages are end-to-end encrypted. Tap to know more!',
+                    style: TextStyle(fontSize: 11, color: Colors.white),)
+                  
+                ],
+              ),
+            ),
+          ),
           Expanded(
             child: Messages(
               message: widget.message, 
               scrollController: _scrollController,
               isUserMessage: widget.isUserMessage,
+              messageStatus: widget.messageStatus,
+              messageTimestamp: widget.messageTimestamp,
               ),
           ),
           Padding(
