@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:xmessenger/Screens/inChatScreen.dart';
@@ -45,6 +45,7 @@ class Chats extends StatelessWidget {
           leading: GestureDetector(
             onTap: () {
               // Implement Function
+              print('Profile Picture');
             },
             child: CircleAvatar(
               backgroundImage: NetworkImage(chatData[index]['profilePicture']),

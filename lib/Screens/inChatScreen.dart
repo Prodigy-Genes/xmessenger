@@ -134,8 +134,16 @@ class _InChatScreenState extends State<InChatScreen> {
                             )
                           : IconButton(
                               onPressed: () {
-                                print('Message sent: ${_textController.text}');
+                               print('Message sent: ${_textController.text}');
                                 // Implement your message sending logic here
+
+                              setState(() {
+                                widget.message.add(_textController.text);
+                                widget.isUserMessage.add(true);
+                                widget.messageStatus.add('Delivered');
+                                widget.messageTimestamp.add(DateTime.now().toLocal().toIso8601String().split('T')[1].substring(0, 5));
+                              });
+                              _textController.clear();
                               },
                               icon: const Icon(Icons.send_rounded, color: Color.fromARGB(255, 0, 255, 145)),
                             ),
@@ -164,3 +172,4 @@ class _InChatScreenState extends State<InChatScreen> {
     );
   }
 }
+

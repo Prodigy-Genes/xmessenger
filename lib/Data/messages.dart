@@ -28,7 +28,11 @@ class Messages extends StatelessWidget {
 
         return Align(
           alignment: isUser ? Alignment.topRight : Alignment.topLeft,
-          child: Container(
+          child: GestureDetector (
+            onLongPress: (){
+              
+            },
+            child: Container(
             margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             padding: const EdgeInsets.all(12),
             width: 150,
@@ -36,6 +40,7 @@ class Messages extends StatelessWidget {
               color: isUser ? const Color.fromARGB(255, 137, 123, 0) : Colors.blueGrey,
               borderRadius: BorderRadius.circular(12),
             ),
+
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -73,9 +78,7 @@ class Messages extends StatelessWidget {
                         )
                     ],
                   ),
-                ]
-
-                else ...[
+                ]else ...[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -90,6 +93,7 @@ class Messages extends StatelessWidget {
               ],
             ),
           ),
+          )
         );
       },
     );
