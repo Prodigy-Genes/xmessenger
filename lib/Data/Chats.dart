@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:xmessenger/Screens/inChatScreen.dart';
+import 'package:xmessenger/Screens/profilePictureScreen.dart';
 
 class Chats extends StatelessWidget {
   const Chats({super.key});
@@ -46,6 +47,12 @@ class Chats extends StatelessWidget {
             onTap: () {
               // Implement Function
               print('Profile Picture');
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfilePictureScreen(
+                contacts: [chatData[index]['contact']], 
+                profilePictures: [chatData[index]['profilePicture']], 
+                selectedIndex: 0)
+                )
+                );
             },
             child: CircleAvatar(
               backgroundImage: NetworkImage(chatData[index]['profilePicture']),

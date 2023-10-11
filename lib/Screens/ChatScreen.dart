@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, library_private_types_in_public_api
 import 'package:flutter/material.dart';
 import 'package:xmessenger/Components/more_vert.dart';
+import 'package:xmessenger/Components/searchicon.dart';
 import 'package:xmessenger/Data/Chats.dart';
 import 'package:xmessenger/Components/cameraIcon.dart';
 import 'package:xmessenger/Components/messageIcon.dart';
@@ -39,6 +40,8 @@ class _ChatScreenState extends State<ChatScreen> {
             icon: const Icon(Icons.search),
             onPressed: () {
               // Implement search functionality
+              showSearch(context: context, 
+              delegate: SearchIcon());
             },
             color: const Color.fromARGB(255, 0, 255, 145)
           ),
