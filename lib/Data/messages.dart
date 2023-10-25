@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, annotate_overrides
 
 import 'package:flutter/material.dart';
 
@@ -24,6 +24,7 @@ class Messages extends StatefulWidget {
 
 class _MessagesState extends State<Messages> {
   late List<bool> selectedMessages = [];
+  bool isSelectionModeActive = false;
 
   @override
   void initState() {
@@ -31,9 +32,20 @@ class _MessagesState extends State<Messages> {
     selectedMessages = List.generate(widget.message.length, (index) => false);
   }
 
+  void didUpdateWidget(covariant Messages oldwidget){
+    super.didUpdateWidget(oldwidget);
+    if (widget.message.length != selectedMessages.length){
+      setState(() {
+        selectedMessages = List.generate(widget.message.length, (index) => false);
+        isSelectionModeActive = false;
+      });
+    }
+  }
+
   void _onLongPress(int index) {
     setState(() {
       selectedMessages[index] = !selectedMessages[index];
+      isSelectionModeActive = selectedMessages.any((isSelected) => isSelected);
     });
   }
 

@@ -1,7 +1,9 @@
 // ignore_for_file: file_names, library_private_types_in_public_api, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:xmessenger/Components/inchat_more_vert.dart';
 import 'package:xmessenger/Data/messages.dart';
+import 'package:xmessenger/Screens/GoingCallsScreen.dart';
 
 class InChatScreen extends StatefulWidget {
   final List<String> contacts;
@@ -58,11 +60,15 @@ class _InChatScreenState extends State<InChatScreen> {
             icon: const Icon(Icons.video_call, color: Color.fromARGB(255, 0, 255, 145)),
           ),
           IconButton(
-            onPressed: () => print('Phone call has been pressed!'),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> const GoingCallsScreen()));
+            },
             icon: const Icon(Icons.phone, color: Color.fromARGB(255, 0, 255, 145)),
           ),
           IconButton(
-            onPressed: () => print('More has been pressed!'),
+            onPressed: () {
+              showInChatMoreVertMenu(context);
+            },
             icon: const Icon(Icons.more_vert, color: Color.fromARGB(255, 0, 255, 145)),
           ),
         ],
