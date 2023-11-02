@@ -61,7 +61,11 @@ class _InChatScreenState extends State<InChatScreen> {
           ),
           IconButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> const GoingCallsScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> const GoingCallsScreen(
+                
+              )
+              )
+              );
             },
             icon: const Icon(Icons.phone, color: Color.fromARGB(255, 0, 255, 145)),
           ),
