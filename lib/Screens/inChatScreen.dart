@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:xmessenger/Components/inchat_more_vert.dart';
 import 'package:xmessenger/Data/messages.dart';
 import 'package:xmessenger/Screens/GoingCallsScreen.dart';
+import 'package:xmessenger/Data/goingcallsdata.dart';
 
 class InChatScreen extends StatefulWidget {
   final List<String> contacts;
@@ -61,8 +62,11 @@ class _InChatScreenState extends State<InChatScreen> {
           ),
           IconButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> const GoingCallsScreen(
-                
+              CallContact selectedContact = GoingCallsData.contacts
+              .firstWhere((contact) => contact.name == widget.contacts[widget.selectedIndex]);
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>  GoingCallsScreen(
+                contactName: selectedContact.name,
+                contactProfilePicture: selectedContact.profilePicture,
               )
               )
               );

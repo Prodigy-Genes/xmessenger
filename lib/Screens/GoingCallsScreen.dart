@@ -1,10 +1,15 @@
-// ignore_for_file: file_names, library_private_types_in_public_api
+// ignore_for_file: file_names, library_private_types_in_public_api, avoid_print, unnecessary_const
 
 import 'package:flutter/material.dart';
-import 'package:xmessenger/Data/goingcallsdata.dart';
 
 class GoingCallsScreen extends StatefulWidget {
-  const GoingCallsScreen({Key? key}) : super(key: key);
+  final String contactName;
+  final String contactProfilePicture;
+
+  const GoingCallsScreen({super.key, 
+    required this.contactName,
+    required this.contactProfilePicture,
+  });
 
   @override
   _GoingCallsScreenState createState() => _GoingCallsScreenState();
@@ -31,38 +36,42 @@ class _GoingCallsScreenState extends State<GoingCallsScreen> {
               ],
             ),
           ),
-
-          Expanded(
-            child: ListView.builder(
-              itemCount: callData.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: NetworkImage(callData[index]['profilePicture']),
-                    radius: 30,
-                  ),
-                  title: Text(callData[index]['contact']),
-                  onTap: () {
-                    // Add functionality when a list item is tapped
-                  },
-                );
-              },
-            ),
-          ),
-
+          const SizedBox(height: 300),
           Container(
             padding: const EdgeInsets.all(31),
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 37, 10, 49),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Row(
+            child: Column(
               children: <Widget>[
-                const SizedBox(width: 70),
-                const Icon(Icons.volume_up, color: Colors.white, size: 36),
-                const SizedBox(width: 50),
-                const Icon(Icons.mic_off, color: Colors.white, size: 36),
-                const SizedBox(width: 50),
+                CircleAvatar(
+                  backgroundImage: NetworkImage(widget.contactProfilePicture),
+                  radius: 50,
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  widget.contactName,
+                  style: const TextStyle(color: Colors.white, fontSize: 18),
+                ),
+                const SizedBox(height: 20),
+                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconButton(
+                      onPressed: (){
+                        print("Sound up!!");
+                      },
+                      
+                      icon: const Icon(Icons.volume_up, color: Colors.white, size: 36)),
+                    IconButton(
+                      onPressed: (){
+                        print('Mic Off!!');
+                      },
+                      icon: const Icon(Icons.mic_off, color: Colors.white, size: 36),)
+                  ],
+                ),
+                const SizedBox(height: 20),
                 IconButton(
                   onPressed: () {
                     Navigator.pop(context);
