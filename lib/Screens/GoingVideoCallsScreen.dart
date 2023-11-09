@@ -1,5 +1,7 @@
-// ignore_for_file: file_names, library_private_types_in_public_api, avoid_print
+// ignore_for_file: file_names, library_private_types_in_public_api, avoid_print, non_constant_identifier_names
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+
 
 class GoingVideoCallsScreen extends StatefulWidget {
   final String contactName;
@@ -18,6 +20,29 @@ class GoingVideoCallsScreen extends StatefulWidget {
 class _GoingVideoCallsScreenState extends State<GoingVideoCallsScreen> {
   bool isMuted = false;
   bool isVideoEnabled = true;
+  late CameraController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeCamera();
+  }
+
+  Future<void> _initializeCamera() async {
+    final cameras = await availableCameras();
+    _controller = CameraController(cameras[0], ResolutionPreset.high);
+    await _controller.initialize();
+    if (mounted) {
+      setState(() {
+        
+      });
+    }
+  }
+  @override
+  void dispose(){
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +64,22 @@ class _GoingVideoCallsScreenState extends State<GoingVideoCallsScreen> {
               ],
             ),
           ),
-          const SizedBox(height: 300),
+          const SizedBox(height: 105),
+          SizedBox(
+            width: double.infinity,
+            child: FutureBuilder<void>(
+              future: _controller.initialize(),
+              // ignore: avoid_types_as_parameter_names
+              builder: (context, AsyncSnapshot){
+                if (AsyncSnapshot.connectionState == ConnectionState.done){
+                  return AspectRatio(aspectRatio: _controller.value.aspectRatio,
+                  child: CameraPreview(_controller),);
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
+            ),
+          ),
           Container(
             padding: const EdgeInsets.all(31),
             decoration: BoxDecoration(
