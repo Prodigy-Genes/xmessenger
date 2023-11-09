@@ -2,9 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:xmessenger/Components/inchat_more_vert.dart';
+import 'package:xmessenger/Data/goingvideocallsdata.dart';
 import 'package:xmessenger/Data/messages.dart';
 import 'package:xmessenger/Screens/GoingCallsScreen.dart';
 import 'package:xmessenger/Data/goingcallsdata.dart';
+import 'package:xmessenger/Screens/GoingVideoCallsScreen.dart';
 
 class InChatScreen extends StatefulWidget {
   final List<String> contacts;
@@ -57,7 +59,16 @@ class _InChatScreenState extends State<InChatScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () => print('video call has been pressed!'),
+            onPressed: () {
+              VideoCallContact selectedContact = GoingVideoCallsData.contacts
+              .firstWhere((contact) => contact.name == widget.contacts[widget.selectedIndex]);
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> GoingVideoCallsScreen(
+                contactName: selectedContact.name, 
+                contactProfilePicture: selectedContact.profilePicture
+                )
+                )
+                );
+            },
             icon: const Icon(Icons.video_call, color: Color.fromARGB(255, 0, 255, 145)),
           ),
           IconButton(

@@ -1,23 +1,23 @@
-// ignore_for_file: file_names, library_private_types_in_public_api, avoid_print, unnecessary_const
-
+// ignore_for_file: file_names, library_private_types_in_public_api, avoid_print
 import 'package:flutter/material.dart';
 
-class GoingCallsScreen extends StatefulWidget {
+class GoingVideoCallsScreen extends StatefulWidget {
   final String contactName;
   final String contactProfilePicture;
 
-  const GoingCallsScreen({super.key, 
+  const GoingVideoCallsScreen({
+    Key? key,
     required this.contactName,
     required this.contactProfilePicture,
-  });
+  }) : super(key: key);
 
   @override
-  _GoingCallsScreenState createState() => _GoingCallsScreenState();
+  _GoingVideoCallsScreenState createState() => _GoingVideoCallsScreenState();
 }
 
-class _GoingCallsScreenState extends State<GoingCallsScreen> {
-  bool isMuted =false;
-  bool soundup = false;
+class _GoingVideoCallsScreenState extends State<GoingVideoCallsScreen> {
+  bool isMuted = false;
+  bool isVideoEnabled = true;
 
   @override
   Widget build(BuildContext context) {
@@ -58,32 +58,35 @@ class _GoingCallsScreenState extends State<GoingCallsScreen> {
                   style: const TextStyle(color: Colors.white, fontSize: 18),
                 ),
                 const SizedBox(height: 20),
-                 Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButton(
-                      onPressed: (){
+                      onPressed: () {
                         setState(() {
-                          soundup = !soundup;
+                          isMuted = !isMuted;
                         });
-                        print("Sound${soundup ? " High" : " Normal"}");
+                        print('Sound ${isMuted ? 'Muted' : 'Unmuted'}');
                       },
-                      
                       icon: Icon(
-                        soundup ?  Icons.volume_up : Icons.volume_down, 
-                        color: Colors.white, 
-                        size: 36)),
+                        isMuted ? Icons.volume_off : Icons.volume_up,
+                        color: Colors.white,
+                        size: 36,
+                      ),
+                    ),
                     IconButton(
-                      onPressed: (){
+                      onPressed: () {
                         setState(() {
-                          isMuted = !isMuted ;
+                          isVideoEnabled = !isVideoEnabled;
                         });
-                        print('Mic${isMuted ? " Muted" : " Unmuted"}');
+                        print('Video ${isVideoEnabled ? 'Enabled' : 'Disabled'}');
                       },
                       icon: Icon(
-                        isMuted ? Icons.mic_off : Icons.mic_external_on, 
-                        color: Colors.white, 
-                        size: 36),)
+                        isVideoEnabled ? Icons.videocam : Icons.videocam_off,
+                        color: Colors.white,
+                        size: 36,
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 20),
