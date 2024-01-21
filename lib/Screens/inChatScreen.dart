@@ -48,11 +48,12 @@ class _InChatScreenState extends State<InChatScreen> {
           child: Row(
             children: [
               CircleAvatar(
-                backgroundImage: NetworkImage(selectedProfilePicture),
+                backgroundImage: AssetImage(selectedProfilePicture),
                 radius: 24,
               ),
               const SizedBox(width: 8),
-              Text(selectedContact),
+              Text(selectedContact,
+              style: const TextStyle(fontSize:15, color: Colors.grey ),),
             ],
           ),
           onTap: () => print('Contact details pressed'),

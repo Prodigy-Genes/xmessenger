@@ -89,7 +89,7 @@ class _GoingVideoCallsScreenState extends State<GoingVideoCallsScreen> {
             child: Column(
               children: <Widget>[
                 CircleAvatar(
-                  backgroundImage: NetworkImage(widget.contactProfilePicture),
+                  backgroundImage: AssetImage(widget.contactProfilePicture),
                   radius: 50,
                 ),
                 const SizedBox(height: 20),

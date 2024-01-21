@@ -17,7 +17,7 @@ class Chats extends StatelessWidget {
         'messageTimestamp': 'yesterday',
         'isUserMessage': false,
         'profilePicture':
-            'https://i.pinimg.com/564x/73/b7/f1/73b7f146a6f5d6201c3fd579aad12f66.jpg',
+            'assets/images/luffy.jpg',
       },
       {
         'contact': 'Contact B',
@@ -26,7 +26,7 @@ class Chats extends StatelessWidget {
         'messageTimestamp': '9:30 AM',
         'isUserMessage': true,
         'profilePicture':
-            'https://i.pinimg.com/564x/72/99/14/729914ee5f05da86c8660d7c785e79a6.jpg',
+            'assets/images/luffy2.jpg',
       },
       {
         'contact': 'Contact C',
@@ -35,7 +35,7 @@ class Chats extends StatelessWidget {
         'messageTimestamp': '10:30 PM',
         'isUserMessage': false,
         'profilePicture':
-            'https://i.pinimg.com/564x/68/ea/28/68ea288e7de5c2c4aec494e6db818731.jpg',
+            'assets/images/another.jpg',
       },
     ];
 
@@ -55,7 +55,7 @@ class Chats extends StatelessWidget {
                 );
             },
             child: CircleAvatar(
-              backgroundImage: NetworkImage(chatData[index]['profilePicture']),
+              backgroundImage: AssetImage(chatData[index]['profilePicture']),
               radius: 30,
             ),
           ),

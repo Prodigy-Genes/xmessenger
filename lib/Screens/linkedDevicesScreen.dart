@@ -25,18 +25,21 @@ class _LinkedDevicesScreenState extends State<LinkedDevicesScreen> {
           Container(
             color: const Color.fromARGB(255, 29, 3, 39),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Image.network(
-                  'https://i.pinimg.com/564x/72/f7/a1/72f7a1048321ab79e7bb5b14e4c14ac1.jpg', 
+                Image.asset(
+                  'assets/images/devices.jpg', 
                   width: double.infinity ,
-                  height: 200, 
+                  height: 150, 
                 ),
                 const SizedBox(height: 25,),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Use XMessenger on Web, Desktop and other Devices...', style: TextStyle(color: Color.fromARGB(255, 0, 255, 145), fontStyle: FontStyle.italic),),
+                      
+                      const Text('Use XMessenger on Web, Desktop and other Devices...', style: TextStyle(color: Color.fromARGB(255, 0, 255, 145), fontStyle: FontStyle.italic, fontSize: 10),),
                       GestureDetector(
-                        child: const Text('Learn More', style: TextStyle(color: Colors.blue),),
+                        child: const Text('Learn More', style: TextStyle(color: Colors.blue, fontSize: 10 ),),
                         onTap: () => print('Link has Been Pressed'),
                       )
                     ]

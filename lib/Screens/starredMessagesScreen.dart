@@ -23,9 +23,9 @@ class _starredMessagesScreenState extends State<starredMessagesScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
             
-          const Padding(
-            padding: EdgeInsets.only(right: 120, bottom: 160),
-            child: IconButton(onPressed: null, icon: Icon(Icons.star_rounded, size: 180, color: Color.fromRGBO(0, 255, 145, 1),)
+          Container(
+            alignment: Alignment.center,
+            child: const IconButton(onPressed: null, icon: Icon(Icons.star_rounded, size: 180, color: Color.fromRGBO(0, 255, 145, 1),)
             ),
             ),
           
