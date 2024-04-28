@@ -1,39 +1,59 @@
-// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:xmessenger/Screens/ChatScreen.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class MySplashScreen extends StatefulWidget {
-  const MySplashScreen ({super.key});
+  const MySplashScreen({Key? key}) : super(key: key);
 
   @override
   _MySplashScreenState createState() => _MySplashScreenState();
-
 }
 
 class _MySplashScreenState extends State<MySplashScreen> {
   late BuildContext _context;
+  bool _isLoading = true;
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    //Store context
+    // Store context
     _context = context;
-    _navigateToChat();
-    }
+    _startLoading();
+  }
 
-  void _navigateToChat() async {
-    try{
-      //Simulate a delay for demonstration purposes
-      await Future.delayed(const Duration(seconds: 5));
+  void _startLoading() {
+    Future.delayed(const Duration(seconds: 5), () {
+      setState(() {
+        _isLoading = false; // Update loading state after 5 seconds
+        _checkInternetAndNavigateToChat(); // Start checking internet connection
+      });
+    });
+  }
 
-      //Navigate to the CHat screen using stored context
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const ChatScreen(),
-        ),
-      );
+  void _checkInternetAndNavigateToChat() async {
+    try {
+      while (true) {
+        var connectivityResult = await Connectivity().checkConnectivity();
+        print("Connectivity Result: $connectivityResult");
+        if (connectivityResult != ConnectivityResult.none) {
+          // Internet Connection is available
+          print("Internet Connection Available. Navigating to Chat Screen...");
+          // Navigate to the Chat screen using stored context
+          Navigator.of(_context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const ChatScreen(),
+            ),
+          );
+          print("Navigation completed.");
+          return; // Exit the loop if internet connection is restored
+        }
 
-    }catch (e) {
-      print("Error navigating to Chat screen $e");
+        // No internet connection, continue loading
+        print("No Internet Connection, continuing to load...");
+        await Future.delayed(const Duration(seconds: 3)); // Wait for 3 seconds
+      }
+    } catch (e) {
+      print("Error navigating to Chat screen: $e");
     }
   }
 
@@ -41,28 +61,45 @@ class _MySplashScreenState extends State<MySplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 44, 0, 62),
-      body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Stack(
         children: [
-          const Text("XMessenger", 
-          style: TextStyle(fontSize: 30, color: Color.fromARGB(255, 0, 255, 145), fontWeight: FontWeight.bold)
+          Center(
+            child: _isLoading
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(20), // Set border radius
+                        child: Image.asset(
+                          'assets/images/xMessenger.jpeg', // Replace with your image path
+                          width: 125,
+                          height: 125,
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+                      const Text(
+                        "XMessenger",
+                        style: TextStyle(
+                          fontSize: 30,
+                          color: Color.fromARGB(255, 0, 255, 145),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Philosopher',
+                        ),
+                      ),
+                      const SizedBox(height: 25),
+                    ],
+                  )
+                : const SizedBox(), // Render nothing when not loading
           ),
-
-          const SizedBox(height: 25,),
-          Container(
-            width: 150,
-
-            child: const LinearProgressIndicator(
-              value: null,
-              minHeight: 5,
-              color: Colors.white,)
-
+          Positioned(
+            bottom: 20,
+            right: 20,
+            child: _isLoading
+                ? const CircularProgressIndicator() // Render circular progress indicator
+                : const SizedBox(), // Render nothing when not loading
           ),
-          
         ],
       ),
-      ),
     );
-  } 
+  }
 }
