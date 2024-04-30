@@ -1,6 +1,10 @@
+// ignore_for_file: library_private_types_in_public_api, avoid_print, use_build_context_synchronously, unused_import
+
 import 'package:flutter/material.dart';
+import 'package:xmessenger/Components/icon.dart';
 import 'package:xmessenger/Screens/ChatScreen.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:xmessenger/Screens/welcome.dart';
 
 class MySplashScreen extends StatefulWidget {
   const MySplashScreen({Key? key}) : super(key: key);
@@ -41,7 +45,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
           // Navigate to the Chat screen using stored context
           Navigator.of(_context).pushReplacement(
             MaterialPageRoute(
-              builder: (context) => const ChatScreen(),
+              builder: (context) => const Welcomescreen(),
             ),
           );
           print("Navigation completed.");
@@ -65,19 +69,12 @@ class _MySplashScreenState extends State<MySplashScreen> {
         children: [
           Center(
             child: _isLoading
-                ? Column(
+                ? const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20), // Set border radius
-                        child: Image.asset(
-                          'assets/images/xMessenger.jpeg', // Replace with your image path
-                          width: 125,
-                          height: 125,
-                        ),
-                      ),
-                      const SizedBox(height: 15),
-                      const Text(
+                      AppIcon(),
+                      SizedBox(height: 15),
+                      Text(
                         "XMessenger",
                         style: TextStyle(
                           fontSize: 30,
@@ -86,7 +83,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
                           fontFamily: 'Philosopher',
                         ),
                       ),
-                      const SizedBox(height: 25),
+                      SizedBox(height: 25),
                     ],
                   )
                 : const SizedBox(), // Render nothing when not loading
